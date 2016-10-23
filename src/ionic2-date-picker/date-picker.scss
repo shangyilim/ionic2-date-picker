@@ -1,0 +1,81 @@
+date-picker {
+
+}
+
+.layout-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.layout-col{
+    display:flex;
+    flex-direction:column;
+}
+.horizontal-center{
+    align-items:center;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.padding-5{
+    padding:5px;
+}
+.padding-10{
+    padding:10px;
+}
+.arrow{
+    margin-left:10px;
+    margin-right:10px;
+}
+
+.day-item-header{
+    div{
+        padding:10px;
+        flex:1; 
+        font-weight:bold;
+    }
+}
+.day-item{
+    flex:1;
+    line-height:36px;
+    min-height:36px;
+   
+}
+.selected{
+        background-color:#e0edff;
+}
+.disabled{
+    color:#cfcfcf;
+}
+
+.dayofweek{
+    font-size:1.5em;
+}
+.day{
+    font-size:3em;
+}
+.month{
+    font-size:1.5em;
+}
+.year{
+    font-size:1.5em;
+}
+.month-year{
+    font-size:1.3em;
+    padding:10px;
+}
+.top-banner{
+    background-color: #1e90ff;
+    color:white;
+    width:100%;
+    padding:10px;
+    min-height:200px;
+}
+
+.calendar-item-container{
+    width:100%;
+    padding:5px;
+    min-height:262px;
+}
