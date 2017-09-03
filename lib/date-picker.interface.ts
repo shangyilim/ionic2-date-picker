@@ -1,7 +1,7 @@
-import  Moment  from "moment";
+import { Moment } from "moment";
 
 export class DateItem {
     isSelected: boolean;
-    momentDate: Moment.Moment;
+    momentDate: Moment;
     isEnabled: boolean;
 }
