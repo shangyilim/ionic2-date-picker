@@ -4,7 +4,7 @@
 This is a component that shows a date picker to select a date.
 
 ## Preview
-![preview](https://raw.githubusercontent.com/shangyilim/ionic2-date-picker/master/date-picker.PNG)
+![preview](https://github.com/shangyilim/ionic2-date-picker/blob/master/date-picker.PNG?raw=true)
 ## Getting Started
 Install using npm
 
