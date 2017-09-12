@@ -17,7 +17,7 @@ import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
-import { DatePicker } from 'ionic2-date-picker/ionic2-date-picker';
+import { DatePicker } from 'ionic2-date-picker';
 
 @NgModule({
   declarations: [
