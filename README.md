@@ -56,7 +56,7 @@ import { Component } from '@angular/core';
 
 import { NavController } from 'ionic-angular';
 
-import { DatePicker } from 'ionic2-date-picker/ionic2-date-picker';
+import { DatePicker } from 'ionic2-date-picker';
 
 @Component({
   selector: 'page-home',
