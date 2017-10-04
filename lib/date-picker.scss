@@ -1,3 +1,4 @@
+.date-picker{
 
     .layout-row{
     display: flex;
@@ -8,12 +9,19 @@
         display:flex;
         flex-direction:column;
     }
+
+    
     .horizontal-center{
         align-items:center;
     }
 
     .text-center{
         text-align: center;
+    }
+
+    .layout-background{
+        background-color:white;
+        height:100%
     }
 
     .padding-5{
@@ -28,11 +36,19 @@
     }
 
     .day-item-header{
-        div{
-            padding:10px;
-            flex:1; 
-            font-weight:bold;
-        }
+        width:100%;
+        flex-wrap:wrap;
+        text-align:center
+    }
+    .day-item-header-item{
+        padding:10px;
+        flex:1; 
+        font-weight:bold;
+    }
+    .day-container{
+        width:100%;
+        flex-wrap:wrap;
+        text-align:center
     }
     .day-item{
         flex:1;
@@ -40,10 +56,10 @@
         min-height:36px;
     
     }
-    .selected{
+    .day-selected{
             background-color:#e0edff;
     }
-    .disabled{
+    .day-disabled{
         color:#cfcfcf;
     }
 
@@ -59,10 +75,12 @@
     .year{
         font-size:1.5em;
     }
+
     .month-year{
         font-size:1.3em;
         padding:10px;
     }
+
     .top-banner{
         background-color: #1e90ff;
         color:white;
@@ -77,3 +95,15 @@
         min-height:262px;
     }
 
+    .action-container{
+        width:100%;
+        justify-content:Flex-end;
+        margin:10px;
+    }
+
+    .cancel-button{
+        color:grey
+    }
+
+
+}
