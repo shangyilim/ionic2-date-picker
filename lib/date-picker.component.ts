@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from "@angular/core";
+import { Component, Output, EventEmitter, ViewEncapsulation } from "@angular/core";
 import { Modal, ModalController, ViewController, NavParams } from "ionic-angular";
 
 import moment from 'moment/src/moment';
@@ -15,7 +15,7 @@ import { DateItem } from "./date-picker.interface";
 @Component({
   selector: 'date-picker',
   templateUrl: 'date-picker.html',
-  styleUrls: ['date-picker.scss']
+  styleUrls: ['date-picker.scss'],
 })
 export class DatePicker {
 
