@@ -78,3 +78,16 @@ export class HomePage {
 }
 
 ```
+
+## Date Picker Options
+The date picker comes with optional configuration options that can be used on the `datePicker.showCalendar()`.
+If you need more options, feel free to leave an issue or submit a pull request ;)
+
+```
+let datePickerOption: DatePickerOption = {
+      minimumDate: new Date() // the minimum date selectable
+}; 
+
+ this.datePicker.showCalendar(datePickerOption);
+
+```
