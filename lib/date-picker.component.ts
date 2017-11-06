@@ -1,9 +1,9 @@
-import { Component, Output, EventEmitter, ViewEncapsulation } from "@angular/core";
+import { Component, Output, EventEmitter, ViewEncapsulation, Input } from "@angular/core";
 import { Modal, ModalController, ViewController, NavParams } from "ionic-angular";
 
 import moment from 'moment/src/moment';
 
-import { DateItem } from "./date-picker.interface";
+import { DateItem, DatePickerOption } from "./date-picker.interface";
 
 /**
  * Generated class for the DatePickerComponent component.
@@ -19,6 +19,9 @@ import { DateItem } from "./date-picker.interface";
 })
 export class DatePicker {
 
+  
+  
+
   @Output()
   public onDateSelected: EventEmitter<Date> = new EventEmitter<Date>();
 
@@ -30,9 +33,13 @@ export class DatePicker {
   private selectedDateItem: DateItem;
   private daysOfMonth: DateItem[];
   private calendarModal: Modal;
+  private datePickerOption?: DatePickerOption;
 
-  constructor(public modalCtrl: ModalController, public viewCtrl: ViewController) {
+  constructor(public modalCtrl: ModalController, public viewCtrl: ViewController, params?: NavParams) {
     this.currentMoment = moment();
+    
+    
+    this.datePickerOption = params && params.data ? params.data : this.datePickerOption;
     this.renderCalender();
   }
 
@@ -59,8 +66,11 @@ export class DatePicker {
       let dateItem: DateItem = {
         isSelected: false,
         momentDate: immunableStartOfMonth.add(i, "day"),
-        isEnabled: this.isBelongToThisMonth(immunableStartOfMonth, month)
+        isEnabled: true
       };
+
+      dateItem.isEnabled = this.isBelongToThisMonth(immunableStartOfMonth, month) &&
+        this.startingFrom(dateItem.momentDate);
 
       calendarDays.push(dateItem);
     }
@@ -139,6 +149,15 @@ export class DatePicker {
     this.renderCalender();
   }
 
+  private startingFrom(currentMomentDate: moment.Moment) {
+    if (!this.datePickerOption || !this.datePickerOption.minimumDate ) return true;
+    let startOfMinimumDay = this.datePickerOption.minimumDate.setHours(0);
+    
+    return currentMomentDate.startOf('day')
+            .isSameOrAfter(moment(startOfMinimumDay).startOf('day'));
+
+  }
+
   private confirmDateSelection() {
     this.viewCtrl.dismiss(this.selectedDateItem.momentDate.toDate());
   }
@@ -147,9 +166,10 @@ export class DatePicker {
     this.viewCtrl.dismiss();
   }
 
-  public showCalendar() {
-    this.calendarModal = this.modalCtrl.create(DatePicker);
-    this.calendarModal.onDidDismiss( ( data: any ) => {
+  public showCalendar(datePickerOption? : DatePickerOption) {
+    this.calendarModal = this.modalCtrl.create(DatePicker, datePickerOption);
+
+    this.calendarModal.onDidDismiss((data: any) => {
       if (data) {
         this.onDateSelected.emit(data);
       }

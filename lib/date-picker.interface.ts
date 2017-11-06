@@ -5,3 +5,7 @@ export class DateItem {
     momentDate: Moment;
     isEnabled: boolean;
 }
+
+export class DatePickerOption{
+    minimumDate?: Date;
+}
