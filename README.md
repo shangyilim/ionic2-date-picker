@@ -83,6 +83,12 @@ export class HomePage {
 The date picker comes with optional configuration options that can be used on the `datePicker.showCalendar()`.
 If you need more options, feel free to leave an issue or submit a pull request ;)
 
+Import the DatePickerOption from the package.
+```
+import { DatePickerOption } from 'ionic2-date-picker';
+```
+
+create the datePickerOption and pass it as an argument to the `showCalendar()` function:
 ```
 let datePickerOption: DatePickerOption = {
       minimumDate: new Date() // the minimum date selectable
@@ -91,3 +97,6 @@ let datePickerOption: DatePickerOption = {
  this.datePicker.showCalendar(datePickerOption);
 
 ```
+## Contributing
+Freely fork and submit a pull request describing what was fixed/added and link it to an issue ;)
+
