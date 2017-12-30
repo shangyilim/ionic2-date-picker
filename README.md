@@ -92,11 +92,18 @@ create the datePickerOption and pass it as an argument to the `showCalendar()` f
 ```
 let datePickerOption: DatePickerOption = {
       minimumDate: new Date() // the minimum date selectable
+      maximumDate: new Date() // the maximum date selectable
 }; 
 
  this.datePicker.showCalendar(datePickerOption);
 
 ```
+### Options
+| Property      | Type | Description  |
+| ------------- |------| -------------|
+| minimumDate   | Date | the minimum selectable date |
+| maximumDate   | Date | the maximum selectable date |
+
 ## Contributing
 Freely fork and submit a pull request describing what was fixed/added and link it to an issue ;)
 
