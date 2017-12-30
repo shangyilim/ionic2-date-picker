@@ -19,8 +19,8 @@ import { DateItem, DatePickerOption } from "./date-picker.interface";
 })
 export class DatePicker {
 
-  
-  
+
+
 
   @Output()
   public onDateSelected: EventEmitter<Date> = new EventEmitter<Date>();
@@ -37,8 +37,8 @@ export class DatePicker {
 
   constructor(public modalCtrl: ModalController, public viewCtrl: ViewController, params?: NavParams) {
     this.currentMoment = moment();
-    
-    
+
+
     this.datePickerOption = params && params.data ? params.data : this.datePickerOption;
     this.renderCalender();
   }
@@ -70,7 +70,7 @@ export class DatePicker {
       };
 
       dateItem.isEnabled = this.isBelongToThisMonth(immunableStartOfMonth, month) &&
-        this.startingFrom(dateItem.momentDate);
+        this.startingFrom(dateItem.momentDate) && this.endingAt(dateItem.momentDate);
 
       calendarDays.push(dateItem);
     }
@@ -150,12 +150,20 @@ export class DatePicker {
   }
 
   private startingFrom(currentMomentDate: moment.Moment) {
-    if (!this.datePickerOption || !this.datePickerOption.minimumDate ) return true;
+    if (!this.datePickerOption || !this.datePickerOption.minimumDate) return true;
     let startOfMinimumDay = this.datePickerOption.minimumDate.setHours(0);
-    
-    return currentMomentDate.startOf('day')
-            .isSameOrAfter(moment(startOfMinimumDay).startOf('day'));
 
+    return currentMomentDate.startOf('day')
+      .isSameOrAfter(moment(startOfMinimumDay).startOf('day'));
+
+  }
+
+  private endingAt(endingMomentDate: moment){
+    if (!this.datePickerOption || !this.datePickerOption.maximumDate) return true;
+    let startOfMaximumDay = this.datePickerOption.maximumDate.setHours(0);
+
+    return endingMomentDate.startOf('day')
+      .isSameOrBefore(moment(startOfMaximumDay).startOf('day'));
   }
 
   private confirmDateSelection() {
@@ -166,7 +174,7 @@ export class DatePicker {
     this.viewCtrl.dismiss();
   }
 
-  public showCalendar(datePickerOption? : DatePickerOption) {
+  public showCalendar(datePickerOption?: DatePickerOption) {
     this.calendarModal = this.modalCtrl.create(DatePicker, datePickerOption);
 
     this.calendarModal.onDidDismiss((data: any) => {

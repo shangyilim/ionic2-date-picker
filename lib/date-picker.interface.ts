@@ -6,6 +6,7 @@ export class DateItem {
     isEnabled: boolean;
 }
 
-export class DatePickerOption{
+export class DatePickerOption {
     minimumDate?: Date;
+    maximumDate? : Date;
 }

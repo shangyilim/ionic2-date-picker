@@ -1,6 +1,6 @@
 {
   "name": "ionic2-date-picker",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "description": "This is a component that shows a date picker to select a date.",
   "main": "date-picker.esm.js",
   "module": "date-picker.esm.js",
@@ -14,6 +14,7 @@
     "build": "npm run bundle && npm run copy",
     "link": "cd dist && npm link",
     "build-link": "npm run build && npm run link"
+
   },
   "dependencies": {
     "@angular/common": "4.1.3",
