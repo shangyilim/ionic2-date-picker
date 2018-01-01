@@ -10,31 +10,31 @@ Install using npm
 
 `$ npm install ionic2-date-picker --save`
 
-Add the component in the `app.module.ts`
+Add the component `DatePicker` and `DatePickerProvider` in the `app.module.ts`
 ```typescript
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
-import { DatePicker } from 'ionic2-date-picker';
+import { DatePickerModule } from 'ionic2-date-picker';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    DatePicker
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    DatePickerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
-    DatePicker
   ],
-  providers: []
+  providers: [
+  ]
 })
 export class AppModule {}
 ```
@@ -50,29 +50,41 @@ Import the module in the page that requires the date picker:
 </ion-content>
 ```
 
-Instantiate an instance of the `DatePicker` 
+Inject the `DatePickerProvider` and  `ModalController` 
 ```typescript
 import { Component } from '@angular/core';
 
-import { NavController } from 'ionic-angular';
+import { ModalController } from 'ionic-angular';
 
-import { DatePicker } from 'ionic2-date-picker';
+import { DatePickerProvider } from 'ionic2-date-picker';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [ DatePicker ]
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public datePicker: DatePicker) {
+  constructor(
+    public navCtrl: NavController,
+    public modalCtrl: ModalController,
+    private datePickerProvider: DatePickerProvider ) {
     
-    this.datePicker = new DatePicker(<any>this.modalCtrl, <any>this.viewController);
-    this.datePicker.onDateSelected.subscribe((date) => { console.log(date); });
   }
 
   showCalendar() {
-    this.datePicker.showCalendar();
+    const dateSelected = 
+      this.datePickerProvider.showCalendar(this.modalCtrl);
+
+    dateSelected.subscribe(date => 
+      console.log("first date picker: date selected is", date));
+  }
+
+  showCalendar2() {
+    const dateSelected = 
+      this.datePickerProvider.showCalendar(this.modalCtrl);
+
+    dateSelected.subscribe(date => 
+      console.log("second date picker: date selected is", date));
   }
 
 }
@@ -94,8 +106,7 @@ let datePickerOption: DatePickerOption = {
       minimumDate: new Date() // the minimum date selectable
       maximumDate: new Date() // the maximum date selectable
 }; 
-
- this.datePicker.showCalendar(datePickerOption);
+this.datePickerProvider.showCalendar(this.modalCtrl, datePickerOption);
 
 ```
 ### Options

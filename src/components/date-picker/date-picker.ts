@@ -1,43 +1,66 @@
-import { Component, Output, EventEmitter, ViewEncapsulation, Input } from "@angular/core";
+import { Component, Output, EventEmitter, ViewEncapsulation, Input, OnDestroy } from "@angular/core";
 import { Modal, ModalController, ViewController, NavParams } from "ionic-angular";
+import * as moment from 'moment';
 
-import moment from 'moment/src/moment';
-
-import { DateItem, DatePickerOption } from "./date-picker.interface";
-
-/**
- * Generated class for the DatePickerComponent component.
- *
- * See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
- * for more info on Angular Components.
- */
+import { DateItem, DatePickerOption } from "../../date-picker.interface";
+import { DatePickerProvider } from '../../providers/date-picker/date-picker';
 
 @Component({
   selector: 'date-picker',
   templateUrl: 'date-picker.html',
   styleUrls: ['date-picker.scss'],
 })
-export class DatePicker {
+export class DatePicker implements OnDestroy {
 
-  @Output()
-  public onDateSelected: EventEmitter<Date> = new EventEmitter<Date>();
+  @Output() public onDateSelected: EventEmitter<Date> = new EventEmitter<Date>();
 
-  @Output()
-  public onCancelled: EventEmitter<any> = new EventEmitter<any>();
+  @Output() public onCancelled: EventEmitter<any> = new EventEmitter<any>();
 
-  private currentMoment: moment.Moment;
-  private daysGroupedByWeek = [];
+  public currentMoment: moment.Moment;
+  public daysGroupedByWeek = [];
+
   private selectedDateItem: DateItem;
   private daysOfMonth: DateItem[];
   private calendarModal: Modal;
   private datePickerOption?: DatePickerOption;
 
-  constructor(public modalCtrl: ModalController, public viewCtrl: ViewController, params?: NavParams) {
+  constructor(private datePickerProvider: DatePickerProvider) {
     this.currentMoment = moment();
-
-
-    this.datePickerOption = params && params.data ? params.data : this.datePickerOption;
     this.renderCalender();
+  }
+
+  ngOnDestroy() {
+    this.datePickerProvider.onUnsubscribe.next();
+    this.datePickerProvider.onUnsubscribe.complete();
+  }
+
+  public setMonthBack() {
+    this.currentMoment.subtract(1, "month");
+    this.renderCalender();
+
+  }
+
+  public setMonthForward() {
+    this.currentMoment.add(1, "month");
+    this.renderCalender();
+  }
+
+  public setYearBack() {
+    this.currentMoment.subtract(1, "year");
+    this.renderCalender();
+  }
+  public setYearForward() {
+    this.currentMoment.add(1, "year");
+    this.renderCalender();
+  }
+
+  public cancel() {
+    this.datePickerProvider.onDismiss.next('dismiss');
+    this.datePickerProvider.onDismiss.complete();
+  }
+
+  public confirmDateSelection() {
+    this.datePickerProvider.onDismiss.next(this.selectedDateItem.momentDate.toDate());
   }
 
   private renderCalender() {
@@ -126,25 +149,7 @@ export class DatePicker {
     return momentDate.month() + 1 === month;
   }
 
-  private setMonthBack() {
-    this.currentMoment.subtract(1, "month");
-    this.renderCalender();
 
-  }
-
-  private setMonthForward() {
-    this.currentMoment.add(1, "month");
-    this.renderCalender();
-  }
-
-  private setYearBack() {
-    this.currentMoment.subtract(1, "year");
-    this.renderCalender();
-  }
-  private setYearForward() {
-    this.currentMoment.add(1, "year");
-    this.renderCalender();
-  }
 
   private startingFrom(currentMomentDate: moment.Moment) {
     if (!this.datePickerOption || !this.datePickerOption.minimumDate) return true;
@@ -155,36 +160,12 @@ export class DatePicker {
 
   }
 
-  private endingAt(endingMomentDate: moment.Moment){
+  private endingAt(endingMomentDate: moment.Moment) {
     if (!this.datePickerOption || !this.datePickerOption.maximumDate) return true;
     let startOfMaximumDay = this.datePickerOption.maximumDate.setHours(0);
 
     return endingMomentDate.startOf('day')
       .isSameOrBefore(moment(startOfMaximumDay).startOf('day'));
   }
-
-  private confirmDateSelection() {
-    this.viewCtrl.dismiss(this.selectedDateItem.momentDate.toDate());
-  }
-
-  private cancel() {
-    this.viewCtrl.dismiss();
-  }
-
-  public showCalendar(datePickerOption?: DatePickerOption) {
-    this.calendarModal = this.modalCtrl.create(DatePicker, datePickerOption);
-
-    this.calendarModal.onDidDismiss((data: any) => {
-      if (data) {
-        this.onDateSelected.emit(data);
-      }
-      else {
-        this.onCancelled.emit();
-      }
-    });
-
-    this.calendarModal.present();
-  }
-
 
 }
