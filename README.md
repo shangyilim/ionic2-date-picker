@@ -10,7 +10,7 @@ Install using npm
 
 `$ npm install ionic2-date-picker --save`
 
-Add the component `DatePicker` and `DatePickerProvider` in the `app.module.ts`
+Add the module `DatePickerModule` in the `app.module.ts`
 ```typescript
 import { NgModule } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
@@ -39,7 +39,7 @@ import { DatePickerModule } from 'ionic2-date-picker';
 export class AppModule {}
 ```
 
-Import the module in the page that requires the date picker:
+Import the `DatePickerProvider` in the page that requires the date picker:
 ```html
 <ion-content padding>
   The world is your oyster.
