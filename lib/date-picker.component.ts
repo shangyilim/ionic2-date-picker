@@ -19,9 +19,6 @@ import { DateItem, DatePickerOption } from "./date-picker.interface";
 })
 export class DatePicker {
 
-
-
-
   @Output()
   public onDateSelected: EventEmitter<Date> = new EventEmitter<Date>();
 
@@ -158,7 +155,7 @@ export class DatePicker {
 
   }
 
-  private endingAt(endingMomentDate: moment){
+  private endingAt(endingMomentDate: moment.Moment){
     if (!this.datePickerOption || !this.datePickerOption.maximumDate) return true;
     let startOfMaximumDay = this.datePickerOption.maximumDate.setHours(0);
 
