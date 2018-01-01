@@ -20,6 +20,9 @@ Desktop.ini
 
 # Temporary files
 coverage/
-dist
+demo/
 docs
 tmp
+
+# Library files
+src/

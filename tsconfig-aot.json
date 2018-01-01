@@ -1,23 +1,29 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "declaration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": ["es2017", "dom"],
-    "rootDir": ".",
+    "lib": [
+      "dom",
+      "es2015"
+    ],
     "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "./dist",
     "sourceMap": true,
     "target": "es5"
   },
   "include": [
-    "./src-inlined/**/*.ts"
+   "./tmp/src-inlined/index.ts"
   ],
   "exclude": [
     "src/**/*.spec.ts",
     "node_modules",
     "demo",
     "dist"
-  ]
+  ],
+  "compileOnSave": false,
+  "atom": {
+    "rewriteTsconfig": false
+  }
 }
