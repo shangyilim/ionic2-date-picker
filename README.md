@@ -3,6 +3,9 @@
 ## Description
 This is a component that shows a date picker to select a date.
 
+## AOT
+Ionic 2 Date Picker is now AOT Compatibile starting from version 1.1.0. Unfortunately this is a breaking change on previous versions of the DatePicker. The example usage can be in the Getting Started guide. 
+
 ## Preview
 ![preview](https://github.com/shangyilim/ionic2-date-picker/blob/master/date-picker.PNG?raw=true)
 ## Getting Started
