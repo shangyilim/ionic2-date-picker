@@ -6,16 +6,15 @@
   "typings": "./src-inlined/index.d.ts",
   "license": "MIT",
   "keywords": [
-    "angular",
-    "angular4",
+    "ionic",
     "aot",
     "aot-compatible",
     "aot-compilation",
     "library",
-    "ng",
-    "seed",
-    "starter",
-    "tick-tock",
+    "date",
+    "calendar",
+    "picker",
+    "date-picker",
     "typescript"
   ],
   "author": {
