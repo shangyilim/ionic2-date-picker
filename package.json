@@ -1,6 +1,6 @@
 {
   "name": "ionic2-date-picker",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Ionic 2 Date Picker",
   "main": "./src-inlined/index.js",
   "typings": "./src-inlined/index.d.ts",
