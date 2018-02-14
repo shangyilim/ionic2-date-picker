@@ -28,7 +28,7 @@
         <div class="day-item-header-item">S</div>
       </div>
       <div class="layout-row day-container" *ngFor="let week of daysGroupedByWeek;">
-        <div class="day-item" [ngClass]="{'day-selected': day.isSelected, 'day-disabled': !day.isEnabled}" *ngFor="let day of week;" (click)="selectDate(day)">{{day.momentDate.date()}}</div>
+        <div class="day-item" [ngClass]="{'day-selected': day.isSelected, 'day-disabled': !day.isEnabled}" *ngFor="let day of week;" tappable (click)="selectDate(day)">{{day.momentDate.date()}}</div>
       </div>
     </div>
     <div class="layout-row action-container">
