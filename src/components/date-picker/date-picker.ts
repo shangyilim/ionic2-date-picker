@@ -24,8 +24,9 @@ export class DatePicker implements OnDestroy {
   private calendarModal: Modal;
   private datePickerOption?: DatePickerOption;
 
-  constructor(private datePickerProvider: DatePickerProvider) {
+  constructor(private datePickerProvider: DatePickerProvider, public params?: NavParams) {
     this.currentMoment = moment();
+     this.datePickerOption = params && params.data ? params.data : this.datePickerOption;
     this.renderCalender();
   }
 
