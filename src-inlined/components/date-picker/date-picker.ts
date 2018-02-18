@@ -14,15 +14,15 @@ import { DatePickerProvider } from '../../providers/date-picker/date-picker';
           <div class="dayofweek padding-5">{{currentMoment.format('dddd')}}</div>
           <div class="text-center padding-10">
             <div class="padding-5">
-              <ion-icon class="arrow" name="arrow-back" (click)="setMonthBack()"></ion-icon>
+              <ion-icon class="arrow" name="arrow-back" tappable (click)="setMonthBack()"></ion-icon>
               <span class="month padding-10">{{currentMoment.format('MMM')}}</span>
-              <ion-icon class="arrow" name="arrow-forward" (click)="setMonthForward()"></ion-icon>
+              <ion-icon class="arrow" name="arrow-forward" tappable (click)="setMonthForward()"></ion-icon>
             </div>
             <div class="day padding-5">{{currentMoment.format('D')}}</div>
             <div class="text-center padding-5">
-              <ion-icon class="arrow" name="arrow-back" (click)="setYearBack()"></ion-icon>
+              <ion-icon class="arrow" name="arrow-back" tappable (click)="setYearBack()"></ion-icon>
               <span class="year padding-10">{{currentMoment.format('YYYY')}}</span>
-              <ion-icon class="arrow" name="arrow-forward" (click)="setYearForward()"></ion-icon>
+              <ion-icon class="arrow" name="arrow-forward" tappable (click)="setYearForward()"></ion-icon>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@ import { DatePickerProvider } from '../../providers/date-picker/date-picker';
             <div class="day-item-header-item">S</div>
           </div>
           <div class="layout-row day-container" *ngFor="let week of daysGroupedByWeek;">
-            <div class="day-item" [ngClass]="{'day-selected': day.isSelected, 'day-disabled': !day.isEnabled}" *ngFor="let day of week;" (click)="selectDate(day)">{{day.momentDate.date()}}</div>
+            <div class="day-item" [ngClass]="{'day-selected': day.isSelected, 'day-disabled': !day.isEnabled}" *ngFor="let day of week;" tappable (click)="selectDate(day)">{{day.momentDate.date()}}</div>
           </div>
         </div>
         <div class="layout-row action-container">
