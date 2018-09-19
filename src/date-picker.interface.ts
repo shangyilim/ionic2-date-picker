@@ -9,4 +9,5 @@ export class DateItem {
 export class DatePickerOption {
     minimumDate?: Date;
     maximumDate? : Date;
+    defaultDate? : Date;
 }

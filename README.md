@@ -106,8 +106,9 @@ import { DatePickerOption } from 'ionic2-date-picker';
 create the datePickerOption and pass it as an argument to the `showCalendar()` function:
 ```
 let datePickerOption: DatePickerOption = {
-      minimumDate: new Date() // the minimum date selectable
-      maximumDate: new Date() // the maximum date selectable
+      minimumDate: new Date(), // the minimum date selectable
+      maximumDate: new Date(), // the maximum date selectable
+      defaultDate: new Date('2020-02-02'),
 }; 
 this.datePickerProvider.showCalendar(this.modalCtrl, datePickerOption);
 
@@ -117,6 +118,7 @@ this.datePickerProvider.showCalendar(this.modalCtrl, datePickerOption);
 | ------------- |------| -------------|
 | minimumDate   | Date | the minimum selectable date |
 | maximumDate   | Date | the maximum selectable date |
+| defaultDate   | Date | the default selected date   |
 
 ## Contributing
 Freely fork and submit a pull request describing what was fixed/added and link it to an issue ;)

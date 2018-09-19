@@ -70,8 +70,15 @@ export class DatePicker implements OnDestroy {
 
   constructor(private datePickerProvider: DatePickerProvider, public params?: NavParams) {
     this.currentMoment = moment();
-     this.datePickerOption = params && params.data ? params.data : this.datePickerOption;
-    this.renderCalender();
+    this.datePickerOption = params && params.data ? params.data : this.datePickerOption;
+
+    if (this.datePickerOption!.defaultDate) {
+      this.currentMoment = moment(this.datePickerOption.defaultDate).startOf('day');
+      this.renderCalender();
+    }
+    else{
+      this.renderCalender();
+    }
   }
 
   ngOnDestroy() {
@@ -112,7 +119,8 @@ export class DatePicker implements OnDestroy {
     this.daysOfMonth = this.generateDaysOfMonth(this.currentMoment.year(), this.currentMoment.month() + 1, this.currentMoment.date());
     this.daysGroupedByWeek = this.groupByWeek(this.daysOfMonth);
 
-    this.setTodayAsDefaultSelectedDate();
+    this.setMomentAsDefaultSelectedDate();
+    
   }
 
   private generateDaysOfMonth(year: number, month: number, day: number) {
@@ -177,10 +185,11 @@ export class DatePicker implements OnDestroy {
 
   }
 
-  private setTodayAsDefaultSelectedDate() {
-    let today = moment().startOf("day");
+  private setMomentAsDefaultSelectedDate() {
+    const startOfDate = this.currentMoment.startOf("day");
+
     let foundDates = this.daysOfMonth
-      .filter((item: DateItem) => today.isSame(item.momentDate.clone().startOf("day")));
+      .filter((item: DateItem) => startOfDate.isSame(item.momentDate.clone().startOf("day")));
 
     if (foundDates && foundDates.length > 0) {
       this.selectedDateItem = foundDates[0];
